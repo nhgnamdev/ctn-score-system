@@ -24,7 +24,7 @@
 | **Ủy viên BCH Đoàn trường** | Toàn trường, nghiệp vụ |
 | **Bí thư Chi đoàn** | Lớp được phân công |
 
-> Đây là **phân quyền mô phỏng phía frontend** để phục vụ demo portfolio, chưa phải hệ thống xác thực production.
+> Đây là **phân quyền mô phỏng phía frontend** để phục vụ demo, chưa phải hệ thống xác thực production.
 
 ## Công nghệ
 
@@ -44,7 +44,7 @@ CTN_Score/
 
 ## Chạy
 
-Mở `index.html` bằng trình duyệt hoặc dùng **VS Code Live Server**.
+(https://nhgnamdev.github.io/ctn-score-system/)
 
 1. Chọn vai trò ở góc phải.
 2. Bấm **Khởi tạo / làm mới Demo**.
@@ -53,6 +53,4 @@ Mở `index.html` bằng trình duyệt hoặc dùng **VS Code Live Server**.
 
 ## Lưu ý
 
-Dữ liệu và điểm số trong project là **demo mô phỏng**. Các rule có `source=REFERENCE` chỉ là nguồn tham khảo, không đại diện cho quy định thi đua hiện hành của nhà trường.
-
-**Portfolio project · Frontend demo · 2026**
+Dữ liệu và điểm số trong project là **demo mô phỏng**. 
