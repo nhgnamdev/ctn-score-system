@@ -26,5 +26,7 @@ Dự án được thiết kế theo tư duy **Data-driven & Event-sourcing** thu
 * **Cỗ máy Seed Data:** Tích hợp bộ tạo dữ liệu giả lập có cấu trúc (39 Lớp, ~1170 Đoàn viên, 35 Tuần giao dịch) xử lý mượt mà trên trình duyệt.
 
 ## 💻 Trải nghiệm Live Demo
-https://github.com/nhgnamdev/ctn-score-system
+[https://github.com/nhgnamdev/ctn-score-system]
+(https://nhgnamdev.github.io/ctn-score-system/)
+
 *Lưu ý: Bấm nút "Khởi tạo Dữ liệu Demo" ở menu góc trái dưới cùng khi truy cập lần đầu.*
