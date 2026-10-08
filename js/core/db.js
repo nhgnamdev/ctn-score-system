@@ -26,13 +26,18 @@ class LocalDB {
  constructor(){ if(!localStorage.getItem(DB_KEY)) this.save(this.empty()); }
  empty(){ return {meta:{version:10,demo:true},years:[{id:'Y2526',name:'2025-2026',status:'ACTIVE',totalWeeks:35}],classes:[],members:[],rules:JSON.parse(JSON.stringify(BASE_RULES)),transactions:[],violations:[],achievements:[],events:[],classBooks:[],duties:[],appeals:[],notifications:[],audit_logs:[],weeklyStatus:[],settings:{baseDiscipline:100,baseStudy:40}}; }
  get(){ return JSON.parse(localStorage.getItem(DB_KEY)); }
- save(data){ localStorage.setItem(DB_KEY,JSON.stringify(data)); }
+ save(data){ localStorage.setItem(DB_KEY,JSON.stringify(data)); if(window.Engine) window.Engine.invalidate(); }
  seed(){ const data=seedDemoData(); this.save(data); return data; }
  reset(){ localStorage.removeItem(DB_KEY); location.reload(); }
  addTransaction(input,user){ const d=this.get(); const id='TXN_'+Date.now()+'_'+Math.floor(Math.random()*999); d.transactions.push({...input,id,reporter:user.name,timestamp:Date.now()}); audit(d,user,'CREATE_TRANSACTION',id); this.save(d); return id; }
  setTransactionStatus(id,status,user){const d=this.get();const t=d.transactions.find(x=>x.id===id);if(!t)return false;t.status=status;audit(d,user,'UPDATE_TRANSACTION',`${id} -> ${status}`);this.save(d);return true;}
  toggleDues(memberId,term,user){const d=this.get();const m=d.members.find(x=>x.id===memberId);if(!m)return; m.dues[term]=!m.dues[term];audit(d,user,'UPDATE_DUES',`${m.name} ${term}`);this.save(d);}
- addRule(rule,user){const d=this.get();d.rules.push({...rule,id:'R_'+Date.now(),version:1,active:true});audit(d,user,'CREATE_RULE',rule.code);this.save(d);}
+ addRule(rule,user){
+ const d=this.get();
+ d.rules.push({...rule,id:'R_'+Date.now(),version:1,active:true});
+ audit(d,user,'CREATE_RULE',rule.code);
+ this.save(d);
+}
  integrity(){const d=this.get(),errors=[];const classIds=new Set(d.classes.map(x=>x.id)),memberMap=new Map(d.members.map(x=>[x.id,x])),ruleIds=new Set(d.rules.map(x=>x.id)); if(d.classes.length!==39)errors.push(`Có ${d.classes.length}/39 lớp`); for(const t of d.transactions){if(!classIds.has(t.classId))errors.push(`${t.id}: class không tồn tại`);if(!ruleIds.has(t.ruleId))errors.push(`${t.id}: rule không tồn tại`);if(t.memberId&& !memberMap.has(t.memberId))errors.push(`${t.id}: member không tồn tại`);if(t.memberId&&memberMap.get(t.memberId).classId!==t.classId)errors.push(`${t.id}: member/class không khớp`);} return {errors,totalTransactions:d.transactions.length,totalMembers:d.members.length,totalClasses:d.classes.length,totalWeeks:d.weeklyStatus.length}; }
 }
 
