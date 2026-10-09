@@ -50,6 +50,8 @@
 
 ## Chạy thử
 
+https://nhgnamdev.github.io/ctn-score-system/
+
 1. Tải ZIP hoặc clone repository về máy.
 2. Mở thư mục dự án bằng VS Code.
 3. Mở `index.html` bằng tiện ích **Live Server**.
